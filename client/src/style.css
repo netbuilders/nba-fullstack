@@ -1,0 +1,256 @@
+:root {
+  --font-primary: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-heading: 'Outfit', system-ui, -apple-system, sans-serif;
+
+  /* Paleta de colores extraída directamente de logo_2020.svg */
+  --nba-red: #D40000;
+  --nba-red-glow: rgba(212, 0, 0, 0.35);
+  --nba-yellow: #FFCC00;
+  --nba-yellow-glow: rgba(255, 204, 0, 0.35);
+  --nba-black: #0B0B0E;
+
+  --bg-dark: #09090C;
+  --card-bg: rgba(18, 18, 24, 0.75);
+  --card-border: rgba(255, 255, 255, 0.08);
+
+  --text-main: #F4F4F5;
+  --text-muted: #A1A1AA;
+  --text-dim: #71717A;
+
+  --radius-xl: 24px;
+  --transition-smooth: 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-primary);
+  background-color: var(--bg-dark);
+  color: var(--text-main);
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem 1.5rem;
+  position: relative;
+  overflow-x: hidden;
+}
+
+/* Efectos de fondo ambiental con los colores del logo */
+.bg-decoration {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.glow {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(120px);
+  opacity: 0.25;
+}
+
+.glow-red {
+  top: -15%;
+  left: -15%;
+  width: 55vw;
+  height: 55vw;
+  background: radial-gradient(circle, var(--nba-red) 0%, transparent 70%);
+}
+
+.glow-yellow {
+  bottom: -15%;
+  right: -15%;
+  width: 55vw;
+  height: 55vw;
+  background: radial-gradient(circle, var(--nba-yellow) 0%, transparent 70%);
+}
+
+.grid-overlay {
+  position: absolute;
+  inset: 0;
+  background-image: 
+    linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+  background-size: 40px 40px;
+  mask-image: radial-gradient(circle at center, black 40%, transparent 80%);
+  -webkit-mask-image: radial-gradient(circle at center, black 40%, transparent 80%);
+}
+
+/* Tarjeta Glassmorphic principal */
+.container {
+  width: 100%;
+  max-width: 560px;
+  position: relative;
+  z-index: 1;
+}
+
+.glassmorphism {
+  background: var(--card-bg);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--card-border);
+  box-shadow: 0 30px 60px -15px rgba(0, 0, 0, 0.8),
+              0 0 30px 0 rgba(212, 0, 0, 0.08);
+  border-radius: var(--radius-xl);
+  padding: 3.5rem 2.5rem;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2.25rem;
+  transition: transform var(--transition-smooth), border-color var(--transition-smooth);
+}
+
+.glassmorphism:hover {
+  border-color: rgba(255, 204, 0, 0.2);
+  transform: translateY(-2px);
+}
+
+/* Logotipo */
+.logo-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0.5rem;
+}
+
+.brand-logo {
+  width: 100%;
+  max-width: 280px;
+  height: auto;
+  filter: drop-shadow(0 4px 16px rgba(0, 0, 0, 0.5));
+  transition: transform var(--transition-smooth);
+}
+
+.brand-logo:hover {
+  transform: scale(1.03);
+}
+
+/* Indicador de estado de mantenimiento */
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.4rem 1rem;
+  background: rgba(255, 204, 0, 0.08);
+  border: 1px solid rgba(255, 204, 0, 0.25);
+  border-radius: 9999px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--nba-yellow);
+  letter-spacing: 0.03em;
+  margin-bottom: 0.5rem;
+}
+
+.pulse-dot {
+  width: 8px;
+  height: 8px;
+  background-color: var(--nba-yellow);
+  border-radius: 50%;
+  position: relative;
+  box-shadow: 0 0 8px var(--nba-yellow);
+  animation: pulse 1.8s infinite;
+}
+
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(255, 204, 0, 0.7);
+  }
+  70% {
+    box-shadow: 0 0 0 8px rgba(255, 204, 0, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(255, 204, 0, 0);
+  }
+}
+
+/* Tipografía y Textos */
+.content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.headline {
+  font-family: var(--font-heading);
+  font-size: 2.35rem;
+  font-weight: 800;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  color: #ffffff;
+}
+
+.accent-text {
+  background: linear-gradient(135deg, var(--nba-yellow) 0%, #FFA800 50%, var(--nba-red) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.description {
+  color: var(--text-muted);
+  font-size: 1.05rem;
+  line-height: 1.6;
+  max-width: 440px;
+}
+
+/* Línea divisoria decorativa */
+.divider {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  width: 100%;
+  max-width: 260px;
+  margin-top: 0.5rem;
+}
+
+.divider-line {
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.15), transparent);
+}
+
+.divider-icon {
+  font-size: 0.9rem;
+  color: var(--nba-yellow);
+  opacity: 0.8;
+}
+
+/* Pie de página */
+.card-footer {
+  font-size: 0.85rem;
+  color: var(--text-dim);
+}
+
+.card-footer strong {
+  color: var(--text-muted);
+  font-weight: 600;
+}
+
+/* Adaptación responsive */
+@media (max-width: 480px) {
+  .glassmorphism {
+    padding: 2.5rem 1.5rem;
+    gap: 1.75rem;
+  }
+
+  .brand-logo {
+    max-width: 220px;
+  }
+
+  .headline {
+    font-size: 1.85rem;
+  }
+
+  .description {
+    font-size: 0.95rem;
+  }
+}
