@@ -223,6 +223,102 @@ body {
   opacity: 0.8;
 }
 
+/* Formulario de contacto */
+.contact-form {
+  width: 100%;
+  max-width: 440px;
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  text-align: left;
+}
+
+.field label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-muted);
+}
+
+.field input,
+.field textarea {
+  width: 100%;
+  font-family: var(--font-primary);
+  font-size: 0.95rem;
+  color: var(--text-main);
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--card-border);
+  border-radius: 12px;
+  padding: 0.75rem 0.9rem;
+  transition: border-color var(--transition-smooth), background var(--transition-smooth);
+  resize: vertical;
+}
+
+.field input:focus,
+.field textarea:focus {
+  outline: none;
+  border-color: rgba(255, 204, 0, 0.5);
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.field input::placeholder,
+.field textarea::placeholder {
+  color: var(--text-dim);
+}
+
+/* Campo trampa antispam: fuera de pantalla pero en el DOM */
+.hp-field {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+.submit-btn {
+  margin-top: 0.25rem;
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 1rem;
+  color: #0B0B0E;
+  background: linear-gradient(135deg, var(--nba-yellow) 0%, #FFA800 100%);
+  border: none;
+  border-radius: 12px;
+  padding: 0.85rem 1rem;
+  cursor: pointer;
+  transition: transform var(--transition-smooth), box-shadow var(--transition-smooth), opacity var(--transition-smooth);
+}
+
+.submit-btn:hover:not(:disabled) {
+  transform: translateY(-1px);
+  box-shadow: 0 8px 24px -8px var(--nba-yellow-glow);
+}
+
+.submit-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.form-status {
+  font-size: 0.88rem;
+  min-height: 1.2rem;
+  margin: 0;
+  text-align: center;
+}
+
+.form-status--success {
+  color: #4ade80;
+}
+
+.form-status--error {
+  color: #f87171;
+}
+
 /* Pie de página */
 .card-footer {
   font-size: 0.85rem;

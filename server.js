@@ -1,6 +1,7 @@
 import express from 'express';
 import rateLimit from 'express-rate-limit';
 import nodemailer from 'nodemailer';
+import helmet from 'helmet';
 import dotenv from 'dotenv';
 import path from 'path';
 import { fileURLToPath } from 'url';
@@ -17,9 +18,12 @@ const PORT = process.env.PORT || 3000;
 // Configurar trust proxy para obtener la IP real del cliente detrás del proxy inverso de Hostinger / Nginx
 app.set('trust proxy', 1);
 
-// Middleware para parsear payloads JSON y URL encoded
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+// Cabeceras de seguridad (CSP, X-Frame-Options, HSTS, etc.)
+app.use(helmet());
+
+// Middleware para parsear payloads JSON y URL encoded con límite de tamaño (anti-DoS)
+app.use(express.json({ limit: '10kb' }));
+app.use(express.urlencoded({ extended: true, limit: '10kb' }));
 
 // Limitador de tasa (Rate Limiting) para la API de contacto:
 // Máximo 5 peticiones cada 15 minutos por IP
@@ -67,6 +71,25 @@ app.post('/api/contacto', contactLimiter, async (req, res) => {
       });
     }
 
+    // Validación de longitud máxima para evitar abuso (spam / emails gigantes)
+    const MAX_LEN = 2000;
+    if (
+      nombre.length > MAX_LEN ||
+      email.length > 254 ||
+      mensaje.length > MAX_LEN
+    ) {
+      return res.status(400).json({
+        success: false,
+        message: 'Uno o más campos exceden la longitud permitida.'
+      });
+    }
+
+    // Sanitización anti-CRLF: elimina saltos de línea para prevenir inyección de cabeceras
+    const sanitize = (value) => String(value).replace(/[\r\n]/g, ' ').trim();
+    const safeNombre = sanitize(nombre);
+    const safeEmail = sanitize(email);
+    const safeMensaje = sanitize(mensaje);
+
     // Configurar transporte SMTP de Nodemailer con variables de entorno
     const transporter = nodemailer.createTransport({
       host: process.env.SMTP_HOST,
@@ -83,17 +106,17 @@ app.post('/api/contacto', contactLimiter, async (req, res) => {
     const mailOptions = {
       from: `"Formulario Web" <${process.env.SMTP_USER}>`,
       to: recipientEmail,
-      replyTo: email,
-      subject: `[Contacto Web] Nuevo mensaje de ${nombre}`,
-      text: `Nombre: ${nombre}\nEmail: ${email}\n\nMensaje:\n${mensaje}`,
+      replyTo: safeEmail,
+      subject: `[Contacto Web] Nuevo mensaje de ${safeNombre}`,
+      text: `Nombre: ${safeNombre}\nEmail: ${safeEmail}\n\nMensaje:\n${safeMensaje}`,
       html: `
         <div style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #e4e4e7; border-radius: 8px; background-color: #ffffff;">
           <h2 style="color: #4f46e5; border-bottom: 2px solid #e4e4e7; padding-bottom: 10px; margin-top: 0;">Nuevo Mensaje de Contacto</h2>
-          <p style="margin: 10px 0;"><strong>Nombre:</strong> ${nombre}</p>
-          <p style="margin: 10px 0;"><strong>Email:</strong> <a href="mailto:${email}" style="color: #4f46e5;">${email}</a></p>
+          <p style="margin: 10px 0;"><strong>Nombre:</strong> ${safeNombre}</p>
+          <p style="margin: 10px 0;"><strong>Email:</strong> <a href="mailto:${safeEmail}" style="color: #4f46e5;">${safeEmail}</a></p>
           <div style="margin-top: 20px;">
             <strong>Mensaje:</strong>
-            <p style="background-color: #f4f4f5; padding: 15px; border-radius: 6px; white-space: pre-wrap; color: #27272a; margin-top: 8px;">${mensaje}</p>
+            <p style="background-color: #f4f4f5; padding: 15px; border-radius: 6px; white-space: pre-wrap; color: #27272a; margin-top: 8px;">${safeMensaje}</p>
           </div>
           <hr style="border: none; border-top: 1px solid #e4e4e7; margin: 20px 0;" />
           <span style="font-size: 12px; color: #71717a;">Enviado automáticamente desde el formulario web de tu sitio en Hostinger.</span>
