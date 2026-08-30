@@ -1,10 +1,15 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" data-theme="dark">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="color-scheme" content="dark light" />
   <meta name="description" content="Contacta con NetBuilders. Escríbenos y te responderemos lo antes posible." />
   <title>Contacto | NetBuilders</title>
+
+  <!-- Tema: antes de que pinte el CSS, aplica la preferencia guardada (localStorage o cookie) o la del sistema.
+       Script externo (public/theme-init.js) para cumplir la CSP de helmet (sin inline) -->
+  <script src="/theme-init.js"></script>
 
   <!-- Google Fonts: Expletus Sans (display), Inter (cuerpo) -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -25,7 +30,8 @@
   <header class="site-header">
     <div class="header-inner">
       <a class="logo-link" href="/" aria-label="NetBuilders – Inicio">
-        <img src="/logo_prueba_fondo_oscuro_expletus.png" alt="NetBuilders" class="header-logo" />
+        <img src="/logo_prueba_fondo_oscuro_expletus.png" alt="NetBuilders" class="header-logo logo-dark" />
+        <img src="/logo_prueba_fondo_claro_expletus.svg" alt="NetBuilders" class="header-logo logo-light" />
       </a>
 
       <nav class="nav" id="site-nav" aria-label="Navegación principal">
@@ -33,6 +39,16 @@
         <a class="nav-link" href="/acerca-de" data-path="/acerca-de">Acerca de</a>
         <a class="nav-link" href="/contacto" data-path="/contacto">Contacto</a>
       </nav>
+
+      <button type="button" class="theme-toggle" id="theme-toggle" aria-label="Cambiar tema" title="Cambiar tema">
+        <svg class="icon-sun" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+          <circle cx="12" cy="12" r="5"></circle>
+          <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"></path>
+        </svg>
+        <svg class="icon-moon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+        </svg>
+      </button>
 
       <button class="nav-toggle" id="nav-toggle" aria-label="Abrir menú" aria-expanded="false" aria-controls="site-nav">
         <span></span><span></span><span></span>

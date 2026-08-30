@@ -4,6 +4,38 @@ document.addEventListener('DOMContentLoaded', () => {
     el.textContent = new Date().getFullYear();
   });
 
+  // Conmutador de tema (sol/luna)
+  const themeToggle = document.getElementById('theme-toggle');
+
+  if (themeToggle) {
+    // Persistencia robusta: localStorage con fallback a cookie.
+    const saveTheme = (theme) => {
+      try {
+        localStorage.setItem('nb-theme', theme);
+      } catch (err) { /* localStorage bloqueado */ }
+      try {
+        document.cookie = `nb-theme=${theme};max-age=31536000;path=/;SameSite=Lax`;
+      } catch (err) { /* cookies bloqueadas */ }
+    };
+
+    const setAria = (theme) => {
+      themeToggle.setAttribute(
+        'aria-label',
+        theme === 'dark' ? 'Cambiar a tema claro' : 'Cambiar a tema oscuro'
+      );
+    };
+
+    themeToggle.addEventListener('click', () => {
+      const current = document.documentElement.getAttribute('data-theme') === 'light' ? 'light' : 'dark';
+      const next = current === 'light' ? 'dark' : 'light';
+      document.documentElement.setAttribute('data-theme', next);
+      saveTheme(next);
+      setAria(next);
+    });
+
+    setAria(document.documentElement.getAttribute('data-theme') || 'dark');
+  }
+
   // Menú móvil
   const navToggle = document.getElementById('nav-toggle');
   const header = document.querySelector('.site-header');
