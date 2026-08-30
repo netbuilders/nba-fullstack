@@ -1,21 +1,27 @@
 :root {
+  /* Tipografías del brand book */
   --font-primary: 'Inter', system-ui, -apple-system, sans-serif;
-  --font-heading: 'Outfit', system-ui, -apple-system, sans-serif;
+  --font-heading: 'Expletus Sans', system-ui, -apple-system, sans-serif;
+  --font-code: 'Fira Code', 'JetBrains Mono', monospace;
 
-  /* Paleta de colores extraída directamente de logo_2020.svg */
-  --nba-red: #D40000;
-  --nba-red-glow: rgba(212, 0, 0, 0.35);
-  --nba-yellow: #FFCC00;
-  --nba-yellow-glow: rgba(255, 204, 0, 0.35);
-  --nba-black: #0B0B0E;
+  /* Paleta Net Builders (brand book) */
+  --onyx-black: #222B2E;
+  --citron-yellow: #F3BE1A;
+  --capri-blue: #00A3E0;
+  --chalk-white: #EDEDED;
+  --smoke-gray: #7A8488;
 
-  --bg-dark: #09090C;
-  --card-bg: rgba(18, 18, 24, 0.75);
-  --card-border: rgba(255, 255, 255, 0.08);
+  --nba-yellow: var(--citron-yellow);
+  --nba-yellow-glow: rgba(243, 190, 26, 0.35);
+  --nba-blue-glow: rgba(0, 163, 224, 0.35);
 
-  --text-main: #F4F4F5;
-  --text-muted: #A1A1AA;
-  --text-dim: #71717A;
+  --bg-dark: var(--onyx-black);
+  --card-bg: rgba(21, 27, 29, 0.72);
+  --card-border: rgba(237, 237, 237, 0.08);
+
+  --text-main: var(--chalk-white);
+  --text-muted: var(--smoke-gray);
+  --text-dim: rgba(122, 132, 136, 0.7);
 
   --radius-xl: 24px;
   --transition-smooth: 0.3s cubic-bezier(0.16, 1, 0.3, 1);
@@ -37,6 +43,10 @@ body {
   padding: 2rem 1.5rem;
   position: relative;
   overflow-x: hidden;
+  background:
+    radial-gradient(50rem 40rem at 15% 0%, rgba(0, 163, 224, 0.10), transparent 60%),
+    radial-gradient(50rem 40rem at 85% 100%, rgba(243, 190, 26, 0.10), transparent 60%),
+    var(--bg-dark);
 }
 
 /* Efectos de fondo ambiental con los colores del logo */
@@ -55,12 +65,12 @@ body {
   opacity: 0.25;
 }
 
-.glow-red {
+.glow-blue {
   top: -15%;
   left: -15%;
   width: 55vw;
   height: 55vw;
-  background: radial-gradient(circle, var(--nba-red) 0%, transparent 70%);
+  background: radial-gradient(circle, var(--capri-blue) 0%, transparent 70%);
 }
 
 .glow-yellow {
@@ -96,7 +106,7 @@ body {
   -webkit-backdrop-filter: blur(20px);
   border: 1px solid var(--card-border);
   box-shadow: 0 30px 60px -15px rgba(0, 0, 0, 0.8),
-              0 0 30px 0 rgba(212, 0, 0, 0.08);
+              0 0 30px 0 rgba(0, 163, 224, 0.08);
   border-radius: var(--radius-xl);
   padding: 3.5rem 2.5rem;
   text-align: center;
@@ -108,7 +118,7 @@ body {
 }
 
 .glassmorphism:hover {
-  border-color: rgba(255, 204, 0, 0.2);
+  border-color: rgba(0, 163, 224, 0.25);
   transform: translateY(-2px);
 }
 
@@ -138,8 +148,8 @@ body {
   align-items: center;
   gap: 0.6rem;
   padding: 0.4rem 1rem;
-  background: rgba(255, 204, 0, 0.08);
-  border: 1px solid rgba(255, 204, 0, 0.25);
+  background: rgba(243, 190, 26, 0.08);
+  border: 1px solid rgba(243, 190, 26, 0.25);
   border-radius: 9999px;
   font-size: 0.85rem;
   font-weight: 600;
@@ -160,13 +170,13 @@ body {
 
 @keyframes pulse {
   0% {
-    box-shadow: 0 0 0 0 rgba(255, 204, 0, 0.7);
+    box-shadow: 0 0 0 0 rgba(243, 190, 26, 0.7);
   }
   70% {
-    box-shadow: 0 0 0 8px rgba(255, 204, 0, 0);
+    box-shadow: 0 0 0 8px rgba(243, 190, 26, 0);
   }
   100% {
-    box-shadow: 0 0 0 0 rgba(255, 204, 0, 0);
+    box-shadow: 0 0 0 0 rgba(243, 190, 26, 0);
   }
 }
 
@@ -181,14 +191,14 @@ body {
 .headline {
   font-family: var(--font-heading);
   font-size: 2.35rem;
-  font-weight: 800;
+  font-weight: 700;
   line-height: 1.2;
   letter-spacing: -0.02em;
-  color: #ffffff;
+  color: var(--chalk-white);
 }
 
 .accent-text {
-  background: linear-gradient(135deg, var(--nba-yellow) 0%, #FFA800 50%, var(--nba-red) 100%);
+  background: linear-gradient(135deg, var(--citron-yellow) 0%, var(--capri-blue) 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -285,8 +295,8 @@ body {
   font-family: var(--font-heading);
   font-weight: 700;
   font-size: 1rem;
-  color: #0B0B0E;
-  background: linear-gradient(135deg, var(--nba-yellow) 0%, #FFA800 100%);
+  color: var(--chalk-white);
+  background: linear-gradient(135deg, #00B7F5 0%, var(--capri-blue) 100%);
   border: none;
   border-radius: 12px;
   padding: 0.85rem 1rem;
@@ -296,7 +306,7 @@ body {
 
 .submit-btn:hover:not(:disabled) {
   transform: translateY(-1px);
-  box-shadow: 0 8px 24px -8px var(--nba-yellow-glow);
+  box-shadow: 0 8px 24px -8px var(--nba-blue-glow);
 }
 
 .submit-btn:disabled {
