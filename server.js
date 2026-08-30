@@ -145,9 +145,22 @@ app.post('/api/contacto', contactLimiter, async (req, res) => {
 const distPath = path.join(__dirname, 'client', 'dist');
 app.use(express.static(distPath));
 
-// Soporte SPA: Redirigir cualquier otra petición GET no reconocida al index.html de Vite
-app.get('*', (req, res) => {
-  res.sendFile(path.join(distPath, 'index.html'));
+// Rutas de páginas (MPA) con URLs limpias
+const pages = {
+  '/': 'index.html',
+  '/acerca-de': 'acerca-de.html',
+  '/contacto': 'contacto.html',
+};
+
+Object.entries(pages).forEach(([route, file]) => {
+  app.get(route, (req, res) => {
+    res.sendFile(path.join(distPath, file));
+  });
+});
+
+// Página 404: cualquier otra ruta no reconocida
+app.use((req, res) => {
+  res.status(404).sendFile(path.join(distPath, '404.html'));
 });
 
 // Iniciar servidor HTTP

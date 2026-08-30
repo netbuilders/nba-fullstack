@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Contacta con NetBuilders. Escríbenos y te responderemos lo antes posible." />
+  <title>Contacto | NetBuilders</title>
+
+  <!-- Google Fonts: Expletus Sans (display), Inter (cuerpo) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Expletus+Sans:wght@600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="/src/style.css" />
+</head>
+<body>
+  <div class="bg-decoration">
+    <div class="glow glow-blue"></div>
+    <div class="glow glow-yellow"></div>
+    <div class="grid-overlay"></div>
+  </div>
+
+  <a class="skip-link" href="#main">Saltar al contenido</a>
+
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="logo-link" href="/" aria-label="NetBuilders – Inicio">
+        <img src="/logo_prueba_fondo_oscuro_expletus.png" alt="NetBuilders" class="header-logo" />
+      </a>
+
+      <nav class="nav" id="site-nav" aria-label="Navegación principal">
+        <a class="nav-link" href="/" data-path="/">Inicio</a>
+        <a class="nav-link" href="/acerca-de" data-path="/acerca-de">Acerca de</a>
+        <a class="nav-link" href="/contacto" data-path="/contacto">Contacto</a>
+      </nav>
+
+      <button class="nav-toggle" id="nav-toggle" aria-label="Abrir menú" aria-expanded="false" aria-controls="site-nav">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <main class="site-main" id="main">
+    <div class="container page-wrap">
+      <section class="glassmorphism page-card">
+        <header class="page-header">
+          <div class="status-badge">
+            <span class="pulse-dot"></span>
+            <span class="status-text">Contacto</span>
+          </div>
+          <h1 class="page-title">Hablemos de tus <span class="accent-text">enredos</span></h1>
+          <p class="page-lead">
+            Cuéntanos en qué estás trabajando. Te leemos y respondemos lo antes posible.
+          </p>
+        </header>
+
+        <div class="contact-grid">
+          <form id="contact-form" class="contact-form" novalidate>
+            <div class="field">
+              <label for="nombre">Nombre</label>
+              <input type="text" id="nombre" name="nombre" autocomplete="name" maxlength="2000" required />
+            </div>
+
+            <div class="field">
+              <label for="email">Email</label>
+              <input type="email" id="email" name="email" autocomplete="email" maxlength="254" required />
+            </div>
+
+            <div class="field">
+              <label for="mensaje">Mensaje</label>
+              <textarea id="mensaje" name="mensaje" rows="5" maxlength="2000" required></textarea>
+            </div>
+
+            <!-- Campo trampa antispam (Honeypot): oculto para humanos, los bots lo rellenan -->
+            <div class="hp-field" aria-hidden="true">
+              <label for="website_url">No completar</label>
+              <input type="text" id="website_url" name="website_url" tabindex="-1" autocomplete="off" />
+            </div>
+
+            <button type="submit" id="submit-btn" class="submit-btn">Enviar mensaje</button>
+            <p id="form-status" class="form-status" role="status" aria-live="polite"></p>
+          </form>
+
+          <aside class="contact-info">
+            <h2 class="section-title">Información</h2>
+            <p class="contact-info-text">Prefieres escribirnos directamente? Nuestro buzón de contacto está en</p>
+            <p class="contact-email">
+              <a href="mailto:socialmedia@netbuilders.biz">socialmedia@netbuilders.biz</a>
+            </p>
+            <div class="page-divider">
+              <span class="divider-line"></span>
+              <span class="divider-icon">⚡</span>
+              <span class="divider-line"></span>
+            </div>
+            <p class="contact-info-text">
+              Respondemos en un plazo de 24–48 h laborables.
+            </p>
+          </aside>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <p>&copy; <span data-year>2026</span> <strong>NetBuilders</strong>. Todos los derechos reservados.</p>
+      <nav class="footer-nav" aria-label="Enlaces de pie de página">
+        <a href="/">Inicio</a>
+        <a href="/acerca-de">Acerca de</a>
+      </nav>
+    </div>
+  </footer>
+
+  <script type="module" src="/src/main.js"></script>
+  <script type="module" src="/src/contact.js"></script>
+</body>
+</html>

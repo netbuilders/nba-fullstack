@@ -1,60 +1,25 @@
 document.addEventListener('DOMContentLoaded', () => {
-  console.log('Netbuilders - Landing "Estamos enredando, pronto volvemos" cargada correctamente.');
+  // Año dinámico en los pies de página
+  document.querySelectorAll('[data-year]').forEach((el) => {
+    el.textContent = new Date().getFullYear();
+  });
 
-  const form = document.getElementById('contact-form');
-  const submitBtn = document.getElementById('submit-btn');
-  const statusEl = document.getElementById('form-status');
+  // Menú móvil
+  const navToggle = document.getElementById('nav-toggle');
+  const header = document.querySelector('.site-header');
 
-  if (!form) return;
+  if (navToggle && header) {
+    navToggle.addEventListener('click', () => {
+      const isOpen = header.classList.toggle('nav-open');
+      navToggle.setAttribute('aria-expanded', String(isOpen));
+    });
+  }
 
-  const setStatus = (message, type) => {
-    statusEl.textContent = message;
-    statusEl.className = `form-status form-status--${type}`;
-  };
-
-  form.addEventListener('submit', async (e) => {
-    e.preventDefault();
-    setStatus('', '');
-
-    const nombre = form.nombre.value.trim();
-    const email = form.email.value.trim();
-    const mensaje = form.mensaje.value.trim();
-    const website_url = form.website_url.value;
-
-    if (!nombre || !email || !mensaje) {
-      setStatus('Por favor, completa todos los campos.', 'error');
-      return;
-    }
-
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(email)) {
-      setStatus('El formato del correo no es válido.', 'error');
-      return;
-    }
-
-    submitBtn.disabled = true;
-    submitBtn.textContent = 'Enviando...';
-
-    try {
-      const res = await fetch('/api/contacto', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ nombre, email, mensaje, website_url }),
-      });
-
-      const data = await res.json().catch(() => ({}));
-
-      if (res.ok && data.success) {
-        setStatus(data.message || 'Mensaje enviado correctamente.', 'success');
-        form.reset();
-      } else {
-        setStatus(data.message || 'No se pudo enviar el mensaje. Inténtalo más tarde.', 'error');
-      }
-    } catch (err) {
-      setStatus('Error de conexión. Inténtalo de nuevo más tarde.', 'error');
-    } finally {
-      submitBtn.disabled = false;
-      submitBtn.textContent = 'Enviar mensaje';
+  // Marcar enlace activo según la ruta actual
+  const path = window.location.pathname.replace(/\/+$/, '') || '/';
+  document.querySelectorAll('.nav-link[data-path]').forEach((link) => {
+    if (link.dataset.path === path) {
+      link.classList.add('active');
     }
   });
 });

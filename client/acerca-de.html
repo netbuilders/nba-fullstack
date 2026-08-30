@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Conoce a NetBuilders: nacida en 2005, evolucionada hacia la era de la IA. Recursos, herramientas y soluciones modulares para developers e IA." />
+  <title>Acerca de | NetBuilders</title>
+
+  <!-- Google Fonts: Expletus Sans (display), Inter (cuerpo) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Expletus+Sans:wght@600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="/src/style.css" />
+</head>
+<body>
+  <div class="bg-decoration">
+    <div class="glow glow-blue"></div>
+    <div class="glow glow-yellow"></div>
+    <div class="grid-overlay"></div>
+  </div>
+
+  <a class="skip-link" href="#main">Saltar al contenido</a>
+
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="logo-link" href="/" aria-label="NetBuilders – Inicio">
+        <img src="/logo_prueba_fondo_oscuro_expletus.png" alt="NetBuilders" class="header-logo" />
+      </a>
+
+      <nav class="nav" id="site-nav" aria-label="Navegación principal">
+        <a class="nav-link" href="/" data-path="/">Inicio</a>
+        <a class="nav-link" href="/acerca-de" data-path="/acerca-de">Acerca de</a>
+        <a class="nav-link" href="/contacto" data-path="/contacto">Contacto</a>
+      </nav>
+
+      <button class="nav-toggle" id="nav-toggle" aria-label="Abrir menú" aria-expanded="false" aria-controls="site-nav">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <main class="site-main" id="main">
+    <div class="container page-wrap">
+      <section class="glassmorphism page-card">
+        <header class="page-header">
+          <div class="status-badge">
+            <span class="pulse-dot"></span>
+            <span class="status-text">Nuestra historia</span>
+          </div>
+          <h1 class="page-title">Acerca de <span class="accent-text">NetBuilders</span></h1>
+          <p class="page-lead">
+            Nacida en 2005, evolucionamos hacia la era de la IA sin perder el ancla: la casita trazada a mano como símbolo humano frente al código automatizado.
+          </p>
+        </header>
+
+        <div class="page-divider">
+          <span class="divider-line"></span>
+          <span class="divider-icon">🏠</span>
+          <span class="divider-line"></span>
+        </div>
+
+        <section class="about-section">
+          <h2 class="section-title">Nuestra historia</h2>
+          <p>
+            NetBuilders comenzó en 2005 con una idea sencilla: construir la red, ladrillo a ladrillo, con cuidado artesanal. Ese espíritu se mantiene hoy, incluso cuando el mundo del desarrollo se ha llenado de automatización e inteligencia artificial.
+          </p>
+          <p>
+            La <strong class="text-accent">casita amarilla</strong> trazada a mano es nuestro recordatorio de que detrás de cada línea de código hay personas. Es el ancla humana que preserva el oficio frente a la máquina.
+          </p>
+        </section>
+
+        <section class="about-section">
+          <h2 class="section-title">Propósito</h2>
+          <p>
+            Ofrecer <strong>recursos, herramientas y soluciones modulares</strong> para developers e inteligencia artificial. Construimos bloques reutilizables para que construir la red sea más rápido, humano y mantenible.
+          </p>
+        </section>
+
+        <section class="features-grid">
+          <article class="feature-card">
+            <span class="feature-icon">🧩</span>
+            <h3 class="feature-title">Recursos</h3>
+            <p class="feature-text">Guías, plantillas y material práctico para equipos de desarrollo.</p>
+          </article>
+
+          <article class="feature-card">
+            <span class="feature-icon">🛠️</span>
+            <h3 class="feature-title">Herramientas</h3>
+            <p class="feature-text">Utilidades que aceleran el trabajo diario de developers.</p>
+          </article>
+
+          <article class="feature-card">
+            <span class="feature-icon">⚡</span>
+            <h3 class="feature-title">Soluciones modulares</h3>
+            <p class="feature-text">Componentes e integraciones pensados para la era de la IA.</p>
+          </article>
+        </section>
+
+        <div class="page-divider">
+          <span class="divider-line"></span>
+          <span class="divider-icon">◇</span>
+          <span class="divider-line"></span>
+        </div>
+
+        <section class="about-cta">
+          <h2 class="section-title">¿Hablamos?</h2>
+          <p>Queremos saber en qué estás enredado.</p>
+          <a class="btn" href="/contacto">Escríbenos</a>
+        </section>
+      </section>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <p>&copy; <span data-year>2026</span> <strong>NetBuilders</strong>. Todos los derechos reservados.</p>
+      <nav class="footer-nav" aria-label="Enlaces de pie de página">
+        <a href="/">Inicio</a>
+        <a href="/contacto">Contacto</a>
+      </nav>
+    </div>
+  </footer>
+
+  <script type="module" src="/src/main.js"></script>
+</body>
+</html>
